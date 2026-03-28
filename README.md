@@ -9,8 +9,12 @@ A simple bar widget for [Noctalia](https://github.com/noctalia/noctalia) that re
 
 ## Requirements
 
+You must have at least one of the following:
+
 - `sqlite3` for direct database queries
-- Optional: [AnkiConnect](https://github.com/FooSoft/anki-connect) and `curl` for API-based queries
+- [AnkiConnect](https://git.sr.ht/~foosoft/anki-connect) and `curl` for API-based queries
+
+> **Note:** When Anki is open, the database is locked and the plugin cannot read it directly. When Anki is closed, AnkiConnect is not running and API-based queries won't work. For the plugin to work in both cases both dependencies are required.
 
 ## Installation
 
