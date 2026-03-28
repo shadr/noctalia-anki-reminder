@@ -10,6 +10,7 @@ ColumnLayout {
     property var pluginApi: null
 
     property string ankiDatabasePath: pluginApi?.pluginSettings?.ankiDatabasePath || ""
+    property string deckName: pluginApi?.pluginSettings?.deckName || ""
     property string doColor: pluginApi?.pluginSettings?.doColor || ""
 
     // Your settings controls here
@@ -21,6 +22,15 @@ ColumnLayout {
         placeholderText: "Anki Sqlite database path"
         text: root.ankiDatabasePath
         onTextChanged: root.ankiDatabasePath = text
+    }
+
+    NTextInput {
+        Layout.fillWidth: true
+        label: "Deck Name"
+        description: "Name of the deck"
+        placeholderText: "Deck"
+        text: root.deckName
+        onTextChanged: root.deckName = text
     }
 
     NColorChoice {
@@ -35,6 +45,7 @@ ColumnLayout {
     // Required: Save function called by the dialog
     function saveSettings() {
         pluginApi.pluginSettings.ankiDatabasePath = root.ankiDatabasePath
+        pluginApi.pluginSettings.deckName = root.deckName
         pluginApi.pluginSettings.doColor = root.doColor
         pluginApi.saveSettings()
     }

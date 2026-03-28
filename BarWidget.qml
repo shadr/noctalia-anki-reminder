@@ -7,13 +7,15 @@ import qs.Modules.Bar.Extras
 import qs.Widgets
 import qs.Services.UI
 
-Rectangle {
+Item {
     id: root
 
     property var pluginApi: null
     property ShellScreen screen
     property string widgetId: ""
     property string section: ""
+
+    readonly property string scriptPath: Qt.resolvedUrl("query-anki.sh").toString().replace("file://", "")
 
     readonly property var pluginSettings: {
         return pluginApi && pluginApi.pluginSettings ? pluginApi.pluginSettings : {
@@ -22,6 +24,7 @@ Rectangle {
 
     property bool didAnkiToday: false
     readonly property string ankiDatabasePath: root.pluginSettings.ankiDatabasePath
+    readonly property string deckName: root.pluginSettings.deckName
     readonly property string doColor: root.pluginSettings.doColor
 
     BarPill {
@@ -46,7 +49,7 @@ Rectangle {
 
     Process {
         id: scriptProc
-        command: ["sqlite3", root.ankiDatabasePath, "SELECT c.mod FROM cards c JOIN decks d ON c.did == d.id WHERE d.name == 'Kaishi 1.5k' COLLATE NOCASE AND date(c.mod, 'unixepoch') > datetime('now', 'localtime', 'start of day', '-1 day')"]
+        command: [root.scriptPath, root.ankiDatabasePath, root.deckName]
         stdout: StdioCollector {
             onTextChanged: root.didAnkiToday = text.trim() !== ""
         }
