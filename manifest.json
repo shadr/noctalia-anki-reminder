@@ -1,0 +1,20 @@
+{
+  "id": "noctalia-anki-reminder",
+  "name": "Anki Reminder",
+  "version": "1.0.0",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "shadr",
+  "license": "MIT",
+  "repository": "https://github.com/shadr/noctalia-anki-reminder",
+  "description": "A simple bar widget to remind you to do Anki",
+  "entryPoints": {
+    "barWidget": "BarWidget.qml",
+    "settings": "Settings.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {}
+  }
+}
