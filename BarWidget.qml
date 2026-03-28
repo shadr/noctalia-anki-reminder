@@ -36,7 +36,7 @@ Item {
         autoHide: true
 
         oppositeDirection: BarService.getPillDirection(root)
-        text: root.didAnkiToday ? "" : "Do your anki!!!"
+        text: root.didAnkiToday ? "" : "Do your Anki"
         customTextColor: Color.resolveColorKeyOptional(doColor)
 
         forceOpen: true
