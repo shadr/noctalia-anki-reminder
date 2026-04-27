@@ -36,15 +36,28 @@ Item {
         autoHide: true
 
         oppositeDirection: BarService.getPillDirection(root)
-        text: root.didAnkiToday ? "" : "Do your Anki"
+        text: "Do your Anki"
         customTextColor: Color.resolveColorKeyOptional(doColor)
 
         forceOpen: true
+
+        onClicked: {
+            openAnki();
+        }
 
         onRightClicked: {
             PanelService.showContextMenu(contextMenu, pill, screen);
         }
 
+    }
+
+    function openAnki() {
+        openAnkiProc.command = "anki"
+        openAnkiProc.running = true;
+    }
+
+    Process {
+        id: openAnkiProc
     }
 
     Process {
