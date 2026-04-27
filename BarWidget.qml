@@ -26,6 +26,7 @@ Item {
     readonly property string ankiDatabasePath: root.pluginSettings.ankiDatabasePath
     readonly property string deckName: root.pluginSettings.deckName
     readonly property string doColor: root.pluginSettings.doColor
+    readonly property int newDayHour: root.pluginSettings.newDayHour ?? 3
 
     BarPill {
         id: pill
@@ -62,7 +63,7 @@ Item {
 
     Process {
         id: scriptProc
-        command: [root.scriptPath, root.ankiDatabasePath, root.deckName]
+        command: [root.scriptPath, root.ankiDatabasePath, root.deckName, root.newDayHour.toString()]
         stdout: StdioCollector {
             onTextChanged: root.didAnkiToday = text.trim() !== ""
         }

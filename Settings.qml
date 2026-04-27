@@ -12,8 +12,8 @@ ColumnLayout {
     property string ankiDatabasePath: pluginApi?.pluginSettings?.ankiDatabasePath || ""
     property string deckName: pluginApi?.pluginSettings?.deckName || ""
     property string doColor: pluginApi?.pluginSettings?.doColor || ""
-
-    // Your settings controls here
+    property string newDayHourStr: String(pluginApi?.pluginSettings?.newDayHour ?? 3)
+    property int newDayHour: parseInt(newDayHourStr) || 3
 
     NTextInput {
         Layout.fillWidth: true
@@ -42,11 +42,26 @@ ColumnLayout {
         }
     }
 
+    NTextInput {
+        Layout.fillWidth: true
+        label: "New Day Hour"
+        description: "Hour (0-23) when a new day starts in Anki"
+        placeholderText: "3"
+        text: root.newDayHourStr
+        onTextChanged: {
+            let val = parseInt(text)
+            if (!isNaN(val) && val >= 0 && val <= 23) {
+                root.newDayHourStr = text
+            }
+        }
+    }
+
     // Required: Save function called by the dialog
     function saveSettings() {
         pluginApi.pluginSettings.ankiDatabasePath = root.ankiDatabasePath
         pluginApi.pluginSettings.deckName = root.deckName
         pluginApi.pluginSettings.doColor = root.doColor
+        pluginApi.pluginSettings.newDayHour = root.newDayHour
         pluginApi.saveSettings()
     }
 }
